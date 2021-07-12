@@ -55,5 +55,7 @@
 		}
 	%>
 	
+	<td><a href="/phonebook2/pbc?action=wform">[전화번호추가]</a> </td>
+	
 </body>
 </html>

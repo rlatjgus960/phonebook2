@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="com.javaex.dao.PhoneDao" %>
-<%@ page import="com.javaex.vo.PersonVo" %>
-
-<%
-
-   PhoneDao phoneDao = new PhoneDao();   
-
-   //id추출
-   String id = request.getParameter("id");
-   int personId = Integer.parseInt(id);
-   System.out.println(personId);
-   
-   //dao 에서 한사람(id)의 정보 가져오기
-   PersonVo personVo = phoneDao.getPerson(personId);
-   System.out.println(personVo.toString());
-   
-   //person+html 작성
-   
-%>
 
 <!DOCTYPE html>
 <html>
@@ -32,10 +13,10 @@
    <p>수정화면 입니다. 아래 항목을 수정하고 "수정" 버튼을 클릭하세요</p>
    
    <form action="/phonebook2/pbc" method="get">
-      이름: <input type="text" name="name" value="<%=personVo.getName()%>"> <br>
-      핸드폰: <input type="text" name="hp" value="<%=personVo.getHp()%>"> <br>
-      회사: <input type="text" name="company" value="<%=personVo.getCompany()%>"> <br>
-      <input type="hidden" name="id" value="<%=personVo.getPersonId() %>"> <br>
+      이름: <input type="text" name="name" value="${pId.name }"> <br>
+      핸드폰: <input type="text" name="hp" value="${pId.hp }"> <br>
+      회사: <input type="text" name="company" value="${pId.company }"> <br>
+      <input type="hidden" name="id" value="${pId.personId }"> <br>
       <input type="hidden" name="action" value="update"> <br>
       <button type="submit">수정</button>
    </form>

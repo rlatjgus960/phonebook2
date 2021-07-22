@@ -1,22 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.PersonVo" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>        
     
-<%
-	//request 안에 데이터 사용 --> pList
-	List<PersonVo> personList = (List<PersonVo>)request.getAttribute("pList");
-	
-	System.out.println("jsp=====================");
-	System.out.println(personList);
-	
-	
-	int age = (int)request.getAttribute("age");
-	String name = (String)request.getAttribute("name");
-	
-	System.out.println(age + "," + name);
-	
-%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,32 +14,28 @@
 	<p>입력한 정보 내역입니다.</p>
 	
 	
-	<%
-		for(int i=0; i<personList.size(); i++) {
-	%>
+	<c:forEach items="${pList }" var="personList">
 		<table border="2">
 		<tr>
 			<td>이름</td>
-			<td><%=personList.get(i).getName() %></td>
+			<td>${personList.name }</td>
 		</tr>
 		<tr>
 			<td>핸드폰</td>
-			<td><%=personList.get(i).getHp() %></td>
+			<td>${personList.hp }</td>
 		</tr>	
 		<tr>
 			<td>회사</td>
-			<td><%=personList.get(i).getCompany() %></td>
+			<td>${personList.company}</td>
 		</tr>	
 		<tr>
-			<td><a href="/phonebook2/pbc?action=uform&id=<%=personList.get(i).getPersonId()%>">[수정폼]</a></td>
-			<td><a href="/phonebook2/pbc?action=delete&id=<%=personList.get(i).getPersonId()%>">[삭제]</a> </td>
+			<td><a href="/phonebook2/pbc?action=uform&id=${personList.personId}">[수정폼]</a></td>
+			<td><a href="/phonebook2/pbc?action=delete&id=${personList.personId}">[삭제]</a> </td>
 		</tr>
 		</table>
 		<br>
+	</c:forEach>
 	
-	<%
-		}
-	%>
 	
 	<td><a href="/phonebook2/pbc?action=wform">[전화번호추가]</a> </td>
 	
